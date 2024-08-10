@@ -38,7 +38,10 @@ export default async function OGImage(req: NextRequest) {
   const pageInfo: NotionPageInfo = await pageInfoRes.json()
   console.log(pageInfo)
 
-  const [interRegularFont] = await Promise.all([interRegularFontP])
+  const [interRegularFont, interBoldFont] = await Promise.all([
+    interRegularFontP,
+    interBoldFontP
+  ])
 
   return new ImageResponse(
     (
@@ -163,13 +166,13 @@ export default async function OGImage(req: NextRequest) {
           data: interRegularFont,
           style: 'normal',
           weight: 400
+        },
+        {
+          name: 'Inter',
+          data: interBoldFont,
+          style: 'normal',
+          weight: 700
         }
-        // {
-        //   name: 'Inter',
-        //   data: interBoldFont,
-        //   style: 'normal',
-        //   weight: 700
-        // }
       ]
     }
   )
