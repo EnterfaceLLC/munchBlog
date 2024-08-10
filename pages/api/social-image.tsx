@@ -163,13 +163,13 @@ export default async function OGImage(req: NextRequest) {
           data: interRegularFont,
           style: 'normal',
           weight: 400
-        },
-        {
-          name: 'Inter',
-          data: interBoldFont,
-          style: 'normal',
-          weight: 700
         }
+        // {
+        //   name: 'Inter',
+        //   data: interBoldFont,
+        //   style: 'normal',
+        //   weight: 700
+        // }
       ]
     }
   )
