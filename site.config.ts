@@ -17,7 +17,7 @@ export default siteConfig({
   description: 'Food Trucks At Your Fingertips',
 
   // social usernames (optional)
-  twitter: 'enterfacellc',
+  // twitter: 'enterfacellc',
   // github: 'transitive-bullshit',
   // linkedin: 'fisch2',
   // mastodon: '#', // optional mastodon profile URL, provides link verification
