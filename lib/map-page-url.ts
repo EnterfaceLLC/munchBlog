@@ -11,40 +11,40 @@ const uuid = !!includeNotionIdInUrls
 
 export const mapPageUrl =
   (site: Site, recordMap: ExtendedRecordMap, searchParams: URLSearchParams) =>
-  (pageId = '') => {
-    const pageUuid = parsePageId(pageId, { uuid: true })
+    (pageId = '') => {
+      const pageUuid = parsePageId(pageId, { uuid: true })
 
-    if (!pageUuid) {
-      return createUrl('/', searchParams)
-    }
+      if (!pageUuid) {
+        return createUrl('/', searchParams)
+      }
 
-    if (uuidToId(pageUuid) === site.rootNotionPageId) {
-      return createUrl('/', searchParams)
-    } else {
-      return createUrl(
-        `/${getCanonicalPageId(pageUuid, recordMap, { uuid })}`,
-        searchParams
-      )
+      if (uuidToId(pageUuid) === site.rootNotionPageId) {
+        return createUrl('/', searchParams)
+      } else {
+        return createUrl(
+          `/${getCanonicalPageId(pageUuid, recordMap, { uuid })}`,
+          searchParams
+        )
+      }
     }
-  }
 
 export const getCanonicalPageUrl =
   (site: Site, recordMap: ExtendedRecordMap) =>
-  (pageId = '') => {
-    const pageUuid = parsePageId(pageId, { uuid: true })
+    (pageId = '') => {
+      const pageUuid = parsePageId(pageId, { uuid: true })
 
-    if (!pageUuid) {
-      return `https://${site.domain}`
-    }
+      if (!pageUuid) {
+        return `https://${site.domain}`
+      }
 
-    if (uuidToId(pageUuid) === site.rootNotionPageId) {
-      return `https://${site.domain}`
-    } else {
-      return `https://${site.domain}/${getCanonicalPageId(pageUuid, recordMap, {
-        uuid
-      })}`
+      if (uuidToId(pageUuid) === site.rootNotionPageId) {
+        return `https://${site.domain}`
+      } else {
+        return `https://${site.domain}/${getCanonicalPageId(pageUuid, recordMap, {
+          uuid
+        })}`
+      }
     }
-  }
 
 function createUrl(path: string, searchParams: URLSearchParams) {
   return [path, searchParams.toString()].filter(Boolean).join('?')
