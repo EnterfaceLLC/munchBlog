@@ -11,7 +11,7 @@ export default siteConfig({
   // basic site info (required)
   name: 'munch Blog',
   domain: 'enterfacellc.com',
-  author: '.Enterface, LLC',
+  author: '.Enterface LLC',
 
   // open graph metadata (optional)
   description: 'Food Trucks At Your Fingertips',
