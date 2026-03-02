@@ -7,6 +7,18 @@ import { db } from './db'
 import { getSiteMap } from './get-site-map'
 import { getPage } from './notion'
 
+function normalizeRecordMapBlockIds(recordMap: ExtendedRecordMap | undefined) {
+  if (!recordMap?.block) {
+    return
+  }
+
+  for (const [blockId, blockEntry] of Object.entries(recordMap.block)) {
+    if (blockEntry?.value && !blockEntry.value.id) {
+      blockEntry.value.id = blockId
+    }
+  }
+}
+
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string
   let recordMap: ExtendedRecordMap
@@ -87,5 +99,6 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
   }
 
   const props = { site, recordMap, pageId }
+  normalizeRecordMapBlockIds(props.recordMap)
   return { ...props, ...(await acl.pageAcl(props)) }
 }

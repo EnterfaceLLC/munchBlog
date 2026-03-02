@@ -101,6 +101,26 @@ const Tweet = ({ id }: { id: string }) => {
   return <TweetEmbed tweetId={id} />
 }
 
+const SafeNextImage: React.FC<any> = ({ src, alt, ...props }) => {
+  if (!src || typeof src !== 'string') {
+    return null
+  }
+
+  return <Image src={src} alt={alt || ''} {...props} />
+}
+
+const SafeNextLink: React.FC<any> = ({ href, children, ...props }) => {
+  if (!href || typeof href !== 'string') {
+    return <>{children}</>
+  }
+
+  return (
+    <Link href={href} {...props}>
+      {children}
+    </Link>
+  )
+}
+
 const propertyLastEditedTimeValue = (
   { block, pageHeader },
   defaultFn: () => React.ReactNode
@@ -153,8 +173,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const components = React.useMemo(
     () => ({
-      nextImage: Image,
-      nextLink: Link,
+      nextImage: SafeNextImage,
+      nextLink: SafeNextLink,
       Code,
       Collection,
       Equation,
